@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-Time Dashboard</title>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <h2>Live Metrics</h2>
+  <ul id="metrics"></ul>
+  <script>
+    const socket = io();
+    const list = document.getElementById("metrics");
+    socket.on("update-metrics", (data) => {
+      const li = document.createElement("li");
+      li.textContent = `${data.name}: ${data.value}`;
+      list.prepend(li);
+    });
+  </script>
+</body>
+</html>
