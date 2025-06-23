@@ -14,6 +14,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
+// Variables
+const PORT = process.env.PORT || 5000;
+let activeUsers = 0
+
 
 // MongoDB Connection
 dbConnection();
@@ -21,6 +25,7 @@ dbConnection();
   // Middleware
 app.use(cors());
 app.use(express.json());
+
 // Socket.IO into req
 app.use((req, res, next) => {
   req.io = io;
@@ -31,20 +36,30 @@ app.use((req, res, next) => {
 app.use('/api/metrics', metricRoutes);
 
 // Serve frontend
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// WebSocket Connection
-io.on('connection', socket => {
-  console.log('Client connected:', socket.id);
-
-  socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
-  });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
 
+// Socket logic
+io.on("connection", (socket) => {
+  activeUsers++;
+  console.log("User connected", activeUsers);
+
+  io.emit("activeUsers", activeUsers);
+  
+
+  socket.on("disconnect", () => {
+    activeUsers--;
+    console.log("User disconnected", activeUsers);
+    io.emit("activeUsers", activeUsers);
+  });
+});
+
 // Start server
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));

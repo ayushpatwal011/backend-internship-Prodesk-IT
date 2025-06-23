@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-Time Dashboard</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div>
+      <p>
+         <h2>Active Users: <bold id="userCount">0</bo></h2>
+      </p>
+    </div>
+    <div>
+      <h2>Live Metrics</h2>
+      <span>For live metrics send post req on http://localhost:4000/api/metrics with json eg: {
+        "name" : "xyz", "value" : 45}</span>
+      <ul id="metrics"></ul>
+    </div>
+
+    <script>
+      const socket = io();
+      const list = document.getElementById("metrics");
+
+
+      socket.on("update-metrics", (data) => {
+        console.log(data);
+        
+        const li = document.createElement("li");
+        li.textContent = `${data.name}: ${data.value}`;
+        list.prepend(li);
+      });
+
+      socket.on("activeUsers", (count) => {
+         document.getElementById("userCount").textContent = count;
+      })
+    </script>
+  </body>
+</html>
