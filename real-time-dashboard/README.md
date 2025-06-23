@@ -14,7 +14,5 @@ Track and visualize live metrics using:
 - `routes/` — API routes
 - `public/` — Frontend (HTML)
 
-## Setup
-
-1. Create `index.js` file:
-2. Create `.env` file:
+ `index.js` file:
+`.env` file:
