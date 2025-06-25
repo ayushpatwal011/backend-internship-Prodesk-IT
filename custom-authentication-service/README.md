@@ -11,15 +11,15 @@ A full-featured authentication system with:
 ---
 ## 📁 Project Structure
 custom-auth-service/
-├── config/ # DB and Google OAuth config
-├── controllers/ # Register, Login, OTP logic
-├── models/ # User Schema
-├── public/ # Frontend HTML/CSS/JS
-├── routes/ # Auth Routes and Procted Routes
-├── utils/ # JWT, OTP helpers
-├── .env # Environment variables
-├── index.js # Main Entry File
-├── README.md
+- config/ # DB and Google OAuth config
+- controllers/ # Register, Login, OTP logic
+- models/ # User Schema
+- public/ # Frontend HTML/CSS/JS
+- routes/ # Auth Routes and Procted Routes
+- utils/ # JWT, OTP helpers
+- .env # Environment variables
+- index.js # Main Entry File
+- README.md
 
 ✨ Features
 🔐 1. User Registration
