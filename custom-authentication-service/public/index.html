@@ -1,0 +1,54 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Auth Service</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Custom Auth Login</h1>
+    <div class="form-section">
+     <a href="/auth/google"><button>Login with Google</button></a>
+    </div>
+    <h2>Or</h2>
+
+    <div class="form-section">
+      <h2>Register</h2>
+      <input id="reg-name" type="text" placeholder="Name" />
+      <input id="reg-email" type="email" placeholder="Email" />
+      <input id="reg-pass" type="password" placeholder="Password" />
+      <select id="reg-role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button onclick="register()">Register</button>
+    </div>
+
+    <div class="form-section">
+      <h2>Login</h2>
+      <input id="login-email" type="email" placeholder="Email" />
+      <input id="login-pass" type="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+    </div>
+
+    <div class="form-section">
+      <h2>OTP Verification</h2>
+      <input id="otp-email" type="email" placeholder="Email" />
+      <input id="otp-code" type="text" placeholder="Enter OTP" />
+      <button onclick="verifyOtp()">Verify</button>
+    </div>
+
+    <div class="form-section" id="dashboard" style="display: none;">
+      <h2>🎉 Welcome Dashboard</h2>
+      <p id="dashboard-text"></p>
+      <button onclick="checkUserRoute()">🔓 Check User Route</button>
+      <button onclick="checkAdminRoute()">🛡️ Check Admin Route</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
